@@ -1,0 +1,125 @@
+Some Variables and Methods are not shown here.
+Also, feel free to add your own Custom GUI in place of the virusGUI skin.
+The windows are drawn in the Popup() function if you want to edit them.
+
+### I recommend that there only be one VirusGUI script active at a time.
+
+Class VirusGUI -
+
+Variables -
+- virus
+	Provides easy access to modify PopupWindows in the latest created VirusGUI.
+	Access it by using VirusGUI.virus
+
+- virusGUI
+	Define your custom gui in the inspector
+
+- popupWindows;
+- multiWindows;
+	When a PopupWindow or MultiWindow is created, they are added into their respective array
+	so they can be accessed later. These can be added in the inspector so they can be shown
+	on startup.
+
+- WindowType {Error, Warning}
+	This changes how the window buttons will be displayed.
+
+Methods
+- RemovePopupsWithFunctionObject(GameObject functionObject)
+	This function will search the popupWindows array and will find
+	which ones have the specified functionObject as the Game Object
+	to send messages to. If the window has the same functionObject,
+	the window is deleted.
+
+	To access this, use
+	virus.RemovePopupsWithFunctionObject(gameObject)
+
+	and specify the desired Game Object
+
+- MoveRect(Rect rect, Vector2 move)
+	Moves "rect" by the amount in "move" then returns a new rect.
+
+- StayOnScreen(Rect rect)
+	If the "rect" goes off screen, its position is recalculated to
+	put it back on screen then returns the new rect.
+
+- RandomPointOnScreen()
+	Returns a random point on the screen
+
+
+Sub-Class PopupVariables -
+
+	Variables -
+	- title
+		Title of the window
+	
+	- message
+		Message shown in the middle of the window
+
+	- windowType
+		The type of window. See Class VirusGUI WindowType above
+		
+		Error -
+			Shows an "Ok" button.
+		Warning -
+			If the "yesFunction" is specified the window will have "Yes" and "No" button.
+			If it's not specified it shows an "Ok" button.
+
+	- stayOnScreen
+		If this is true, StayOnScreen will be called in OnGUI to keep
+		this window on the screen.
+
+	- closeButton
+		If true, it will show an X button in the top right of the window.
+		If you press the X button, it will call OnPopupX if "functionObject" exists.
+	
+	- runFromCursor
+		If true, it will enable the windows to move away from the cursor if the cursor
+		enters the window's rect.
+	
+	- runSpeed
+		How fast the window will move away from the mouse.
+
+	- spazWindow
+		If true, the window will constantly shake around the screen.
+
+	- spazSpeed
+		How often the shakes will happen.
+
+	- spazMagnitude
+		How far the window goes on each shake.
+
+	- functionObject
+		The Game Object that a message is sent to from the window.
+
+	- yesFunction
+		The name of the function/method in a script on the functionObject.
+		The function will be called when the "Yes" or "Ok" button is pressed.
+	
+	- noFunction
+		The name of the function/method in a script on the functionObject.
+		The function will be called when the "No" button is pressed.
+	
+	- yesParameter, noParameter
+		These two are the optional parameters for the yesFunction and noFunction respectively
+
+Sub-Class PopupWindow -
+	
+	Variables	-
+	- popupVariables
+		This specifies how this popup window will act.
+	
+	- rect
+		The position and size of the window.
+
+Sub-Class MultiWindow -
+
+	Variables	-
+	- popupVariables
+		This is assigned to each popup window that this MultiWindow creates.
+
+- desiredAmount
+	The total amount of windows you want created
+
+- popupSpeed
+	Effects the creation time of the windows. The windows won't all be created at
+	the same time, unless you set the popupSpeed very high.
