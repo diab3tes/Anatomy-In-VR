@@ -49,6 +49,6 @@ Each organ has its functionality table where user can know details about it.
 ## Appendix
 
 To use this app you need to download the [apk file](https://github.com/diab3tes/Anatomy-In-VR/blob/main/Anatomy%20Lab.apk) and enable 3rd party installation enable in your phone additionally you need google cardboard app from playstore.
-Now your all set to experiance anatomy in vertual reality.
+Now your all set to experiance anatomy in virtual reality.
 
   
